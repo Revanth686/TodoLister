@@ -1,0 +1,31 @@
+{
+  "name": "todolister",
+  "version": "1.0.0",
+  "description": "Just Another CLI Todo App",
+  "main": "todo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node todo.js"
+  },
+  "bin": {
+    "todo": "./todo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Revanth686/TodoLister.git"
+  },
+  "keywords": [
+    "todo",
+    "cli",
+    "todo-cli"
+  ],
+  "bugs":{
+	  "url":"https://github.com/Revanth686/TodoLister/issues"
+  },
+  "homepage":"https://github.com/Revanth686/TodoLister#readme",
+  "author": "Revanth686",
+  "license": "ISC",
+  "dependencies": {
+    "@clack/prompts": "^0.7.0"
+  }
+}
