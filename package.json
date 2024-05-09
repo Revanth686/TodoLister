@@ -1,6 +1,6 @@
 {
   "name": "todolister",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Just Another CLI Todo App",
   "main": "todo.js",
   "scripts": {
@@ -19,10 +19,10 @@
     "cli",
     "todo-cli"
   ],
-  "bugs":{
-	  "url":"https://github.com/Revanth686/TodoLister/issues"
+  "bugs": {
+    "url": "https://github.com/Revanth686/TodoLister/issues"
   },
-  "homepage":"https://github.com/Revanth686/TodoLister#readme",
+  "homepage": "https://github.com/Revanth686/TodoLister#readme",
   "author": "Revanth686",
   "license": "ISC",
   "dependencies": {
