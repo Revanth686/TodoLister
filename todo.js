@@ -19,7 +19,7 @@ function writeToFile(todos) {
   fs.writeFileSync(
     path.join(__dirname, "/todos.json"),
     JSON.stringify(todos),
-    "utf-8"
+    "utf-8",
   );
 }
 
@@ -39,7 +39,7 @@ function logItems(allTodos) {
   log.info(
     `${pc.underline(pc.yellow("All todos:"))}\n${
       todoList.length ? todoList.join("\n") : pc.yellow("No todos set")
-    }`
+    }`,
   );
 }
 
@@ -50,6 +50,30 @@ function handleCancellation(val) {
   }
 }
 
+const promptText = async (msg, placeholder) => {
+  const inputValue = await text({
+    message: pc.green(pc.bold(msg)),
+    placeholder: placeholder,
+    validate: (value) => {
+      return value?.trim() ? null : pc.red(pc.dim(pc.italic(`Can't be empty`)));
+    },
+  });
+  return inputValue;
+};
+
+const promptNum = async (msg, placeholder) => {
+  const inputValue = await text({
+    message: pc.green(pc.bold(msg)),
+    placeholder: placeholder,
+    validate: (value) => {
+      const num = Number(value?.trim());
+      return isNaN(num) || num == 0
+        ? pc.red(pc.dim(pc.italic(`invalid`)))
+        : null;
+    },
+  });
+  return inputValue;
+};
 const todo = (async () => {
   let allTodos = await loadFromFile();
   let option;
@@ -64,7 +88,8 @@ const todo = (async () => {
         { value: 1, label: "1.get all todos" },
         { value: 2, label: "2.add new todo" },
         { value: 3, label: "3.del a todo" },
-        { value: 4, label: "4.Purge all" },
+        { value: 4, label: "4.Update a todo" },
+        { value: 5, label: "5.Purge all" },
       ],
     });
     handleCancellation(option);
@@ -86,29 +111,55 @@ const todo = (async () => {
         index = Math.floor(Math.random() * 100);
       } while (allTodos.find((todo) => todo.id === index));
       // } while (todoIndexes.includes(index));
-      const todoValue = await text({
-        message: pc.green(pc.bold("enter todo :")),
-        placeholder: "become elon musk",
-      });
+      const todoValue = await promptText("enter todo: ", "become elon musk");
       handleCancellation(todoValue);
-      allTodos.push({
-        id: index,
-        title: todoValue,
-      });
+      await note(pc.blue(pc.bold(`you enterd ${todoValue}`)));
+      todoValue &&
+        allTodos.push({
+          id: index,
+          title: todoValue,
+        });
       await writeToFile(allTodos);
       logItems(allTodos);
     }
     //DEL A TODO WITH ID
     else if (option === 3) {
       allTodos = await loadFromFile();
-      const delId = await text({
-        message: pc.green(pc.bold("enter ID of todo u wanna del")),
-        placeholder: "ex: 1",
+      const delIds = await promptText(
+        "enter single or multiple ID's sep by spaces",
+        "ex: 1 2 3",
+      );
+      handleCancellation(delIds);
+      delIdArr = delIds.split(" ");
+      delIdArr.forEach((id) => {
+        allTodos = allTodos.filter((todo) => todo.id !== Number(id));
       });
-      handleCancellation(delId);
-      allTodos = allTodos.filter((todo) => todo.id !== Number(delId));
       await writeToFile(allTodos);
-      log.info(`successfully deleted ${delId}`);
+      log.info(`successfully deleted todos`);
+      logItems(allTodos);
+    }
+    //UPDATING A TODO
+    else if (option === 4) {
+      allTodos = await loadFromFile();
+      const updateId = await promptNum(
+        "enter ID of todo u wanna update",
+        "ex: 1",
+      );
+      handleCancellation(updateId);
+      const updatedData = await promptText(
+        `enter new data for ${updateId.trim()}`,
+        "nothing here",
+      );
+      handleCancellation(updatedData);
+      allTodos = allTodos.map((todo) => {
+        return todo.id === Number(updateId)
+          ? updatedData
+            ? { ...todo, title: updatedData }
+            : todo
+          : todo;
+      });
+      await writeToFile(allTodos);
+      log.info(`successfully updated todo`);
       logItems(allTodos);
     } else {
       //DEL ALL TODOS
