@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 1.0.1 - 2024-05-09
 
 [view diff](https://github.com/Revanth686/TodoLister/compare/v1.0.0...v1.1.0)
+
 testing releases
 
 ### changed
