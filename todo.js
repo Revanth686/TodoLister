@@ -113,7 +113,6 @@ const todo = (async () => {
       // } while (todoIndexes.includes(index));
       const todoValue = await promptText("enter todo: ", "become elon musk");
       handleCancellation(todoValue);
-      await note(pc.blue(pc.bold(`you enterd ${todoValue}`)));
       todoValue &&
         allTodos.push({
           id: index,
