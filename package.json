@@ -1,6 +1,6 @@
 {
   "name": "todolister",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Just Another CLI Todo App",
   "main": "todo.js",
   "scripts": {
