@@ -1,15 +1,20 @@
 {
   "name": "todolister",
-  "version": "1.1.1",
-  "description": "Just Another CLI Todo App",
-  "main": "todo.js",
+  "version": "2.0.0",
+  "description": "just another tui Todo App",
+  "type": "module",
+  "engines": {
+    "node": ">=16"
+  },
+  "bin": "dist/cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node todo.js"
+    "build": "babel src -d dist",
+    "start": "node dist/cli.js"
   },
-  "bin": {
-    "todo": "./todo.js"
-  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Revanth686/TodoLister.git"
@@ -17,7 +22,8 @@
   "keywords": [
     "todo",
     "cli",
-    "todo-cli"
+    "tui",
+    "todo-tui"
   ],
   "bugs": {
     "url": "https://github.com/Revanth686/TodoLister/issues"
@@ -26,6 +32,22 @@
   "author": "Revanth686",
   "license": "ISC",
   "dependencies": {
-    "@clack/prompts": "^0.7.0"
+    "chalk": "^5.3.0",
+    "ink": "^4.4.1",
+    "ink-text-input": "^5.0.1",
+    "meow": "^13.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "terminal-size": "^4.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.5",
+    "@babel/core": "^7.24.5",
+    "@babel/preset-react": "^7.24.1"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react"
+    ]
   }
 }
