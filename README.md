@@ -1,6 +1,6 @@
 # TodoLister
 
-tui(ish) todo app with ncurses **like** interface
+tui(ish) todo app with ncurses *like* interface
 
 ### installation
 
