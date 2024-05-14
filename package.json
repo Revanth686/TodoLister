@@ -1,6 +1,6 @@
 {
   "name": "todolister",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "just another tui Todo App",
   "type": "module",
   "engines": {
