@@ -1,11 +1,23 @@
-# TodoLister 
+# TodoLister
 
-just another cli todo app
+tui(ish) todo app with ncurses **like** interface
 
 ### installation
 
-`npm i -g todolister`
+`npm i -g todolister` || `npx todolister`
+
+### setup
+
+```
+git clone
+cd todolister
+npm install
+npm run build
+npm start
+```
 
 ### usage
 
-run `todo` from any location to start
+`todo` run the app
+
+`todo -h` see help page
