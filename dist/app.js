@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import { Text, useInput, Box, useApp } from "ink";
+import { useStdin, Text, useInput, Box, useApp } from "ink";
 import fs from "fs";
 import { UncontrolledTextInput } from "ink-text-input";
 import { AppContext } from "./Contexts.js";
@@ -13,7 +13,7 @@ function loadTodos() {
     const data = fs.readFileSync(dataFilePath, "utf8");
     return JSON.parse(data);
   } catch (error) {
-    // Return an empty array if file doesn't exist or data is invalid
+    // returns empty array if file doesn't exist or data is invalid
     return [];
   }
 }
@@ -131,11 +131,6 @@ function Header() {
   }, "TODOLISTER")));
 }
 function TodosListing() {
-  //TODO:
-  //cli screen instructions --help,--color
-  //add a .Dockerfile
-  //test it in docker container,
-  //git push,npm publish
   const {
     todos,
     terminalWidth,
@@ -277,4 +272,26 @@ function App({
     flexDirection: "column"
   }, /*#__PURE__*/React.createElement(Header, null), /*#__PURE__*/React.createElement(TodosListing, null))));
 }
-export default App;
+const CompThatDoesntNeedInput = () => {
+  return /*#__PURE__*/React.createElement(Box, {
+    padding: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "red",
+    borderStyle: "round"
+  }, /*#__PURE__*/React.createElement(Text, {
+    color: "red"
+  }, "Error:"), /*#__PURE__*/React.createElement(Text, null, "tty/stdin/stdout not detected"), /*#__PURE__*/React.createElement(Text, null, "Todolister needs input,output streams attached along with tty to run"));
+};
+const Main = ({
+  prefColor
+}) => {
+  const {
+    isRawModeSupported
+  } = useStdin();
+  return isRawModeSupported ? /*#__PURE__*/React.createElement(App, {
+    prefColor: prefColor
+  }) : /*#__PURE__*/React.createElement(CompThatDoesntNeedInput, null);
+};
+export default Main;

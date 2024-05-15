@@ -5,7 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.1.2 - 2024-05-15
+
+-add: added fallback component for environments with tty related issues
+
 ## 2.1.1 - 2024-05-14
+
 [view diff](https://github.com/Revanth686/TodoLister/compare/v1.1.1...v2.1.1)
 
 patch version update

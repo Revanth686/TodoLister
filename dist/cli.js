@@ -2,7 +2,7 @@
 import React from "react";
 import { render } from "ink";
 import meow from "meow";
-import App from "./app.js";
+import Main from "./app.js";
 import chalk from "chalk";
 const validColors = ["red", "blue", "green", "magenta", "cyan", "yellow", "grey"];
 const cli = meow({
@@ -45,6 +45,6 @@ const cli = meow({
   },
   description: false
 });
-!(cli.flags.help || cli.flags.h || cli.flags.version || cli.flags.v) && render( /*#__PURE__*/React.createElement(App, {
+!(cli.flags.help || cli.flags.h || cli.flags.version || cli.flags.v) && render( /*#__PURE__*/React.createElement(Main, {
   prefColor: validColors.includes(cli.flags.color) ? cli.flags.color : "green"
 }));

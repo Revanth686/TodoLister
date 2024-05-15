@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import { Text, useInput, Box, useApp } from "ink";
+import { useStdin, Text, useInput, Box, useApp } from "ink";
 import fs from "fs";
 import { UncontrolledTextInput } from "ink-text-input";
 import { AppContext } from "./Contexts.js";
@@ -137,7 +137,6 @@ function Header() {
   );
 }
 function TodosListing() {
-
   const { todos, terminalWidth, selectedId, updateMode, inputFocus, color } =
     useContext(AppContext);
   const lineLength = terminalWidth - 6;
@@ -284,4 +283,30 @@ function App({ prefColor }) {
     </>
   );
 }
-export default App;
+const CompThatDoesntNeedInput = () => {
+  return (
+    <Box
+      padding={1}
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      borderColor="red"
+      borderStyle="round"
+    >
+      <Text color="red">Error:</Text>
+      <Text>tty/stdin/stdout not detected</Text>
+      <Text>
+        Todolister needs input,output streams attached along with tty to run
+      </Text>
+    </Box>
+  );
+};
+const Main = ({ prefColor }) => {
+  const { isRawModeSupported } = useStdin();
+  return isRawModeSupported ? (
+    <App prefColor={prefColor} />
+  ) : (
+    <CompThatDoesntNeedInput />
+  );
+};
+export default Main;

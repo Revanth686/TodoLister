@@ -2,7 +2,7 @@
 import React from "react";
 import { render } from "ink";
 import meow from "meow";
-import App from "./app.js";
+import Main from "./app.js";
 import chalk from "chalk";
 
 const validColors = [
@@ -57,7 +57,7 @@ const cli = meow({
 });
 !(cli.flags.help || cli.flags.h || cli.flags.version || cli.flags.v) &&
   render(
-    <App
+    <Main
       prefColor={
         validColors.includes(cli.flags.color) ? cli.flags.color : "green"
       }
