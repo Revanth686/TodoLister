@@ -13,7 +13,7 @@ function loadTodos() {
     const data = fs.readFileSync(dataFilePath, "utf8");
     return JSON.parse(data);
   } catch (error) {
-    // Return an empty array if file doesn't exist or data is invalid
+    // returns empty array if file doesn't exist or data is invalid
     return [];
   }
 }
@@ -137,11 +137,7 @@ function Header() {
   );
 }
 function TodosListing() {
-  //TODO:
-  //cli screen instructions --help,--color
-  //add a .Dockerfile
-  //test it in docker container,
-  //git push,npm publish
+
   const { todos, terminalWidth, selectedId, updateMode, inputFocus, color } =
     useContext(AppContext);
   const lineLength = terminalWidth - 6;
